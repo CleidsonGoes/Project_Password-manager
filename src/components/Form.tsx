@@ -1,20 +1,28 @@
 function Form() {
   return (
     <form>
-      <label htmlFor="Nome do serviço">
+      <label>
+        Nome do serviço
         <input type="text" />
       </label>
-      <label htmlFor="Login">
+      <label>
+        Login
         <input type="text" />
       </label>
-      <label htmlFor="Senha">
+      <label>
+        Senha
         <input type="password" />
       </label>
-      <label htmlFor="URL">
+      <label>
+        URL
         <input type="text" />
       </label>
-      <button>Cadastrar</button>
-      <button>Cancelar</button>
+      <button>
+        Cadastrar
+      </button>
+      <button>
+        Cancelar
+      </button>
     </form>
   );
 }
