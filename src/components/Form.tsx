@@ -1,4 +1,15 @@
-function Form() {
+type FormProps = {
+  exibitionElement: React.Dispatch<React.SetStateAction<boolean>>,
+};
+
+type ButtonCancel = React.MouseEvent<HTMLButtonElement, MouseEvent>;
+
+function Form({ exibitionElement }:FormProps) {
+  const handlerExibitionComponent = (event: ButtonCancel) => {
+    event.preventDefault();
+    exibitionElement(false);
+  };
+
   return (
     <form>
       <label>
@@ -20,7 +31,7 @@ function Form() {
       <button>
         Cadastrar
       </button>
-      <button>
+      <button onClick={ handlerExibitionComponent }>
         Cancelar
       </button>
     </form>

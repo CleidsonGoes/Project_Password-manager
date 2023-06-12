@@ -3,7 +3,6 @@ import './App.css';
 import Form from './components/Form';
 
 function App() {
-  const [exibitionButtonPassword, setExibitionButtonPassword] = useState(false);
   const [exibitionForm, setExibitionForm] = useState(false);
 
   const handlerExibitionComponent = () => {
@@ -11,13 +10,13 @@ function App() {
   };
 
   return (
-    <>
+    <div>
       <h1>Gerenciador de senhas</h1>
       {
-        exibitionForm ? <Form />
+        exibitionForm ? <Form exibitionElement={ setExibitionForm } />
           : <button onClick={ handlerExibitionComponent }>Cadastrar nova senha</button>
       }
-    </>
+    </div>
   );
 }
 
