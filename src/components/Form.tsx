@@ -1,12 +1,21 @@
 import { useState } from 'react';
 
+type Service = {
+  name: string,
+  login: string,
+  password: string,
+  url: string
+};
+
 type FormProps = {
   exibitionElement: React.Dispatch<React.SetStateAction<boolean>>,
+  setService: React.Dispatch<React.SetStateAction<Service[]>>
+  service: Service[]
 };
 
 type ButtonCancel = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 
-function Form({ exibitionElement }:FormProps) {
+function Form({ exibitionElement, setService, service }:FormProps) {
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -29,6 +38,17 @@ function Form({ exibitionElement }:FormProps) {
   const handlerExibitionComponent = (event: ButtonCancel) => {
     event.preventDefault();
     exibitionElement(false);
+  };
+
+  const handlerRegister = (event:ButtonCancel) => {
+    event.preventDefault();
+    const objFields = {
+      name,
+      login,
+      password,
+      url,
+    };
+    setService([...service, objFields]);
   };
 
   return (
@@ -75,6 +95,7 @@ function Form({ exibitionElement }:FormProps) {
       </label>
       <button
         disabled={ !buttonDisable }
+        onClick={ handlerRegister }
       >
         Cadastrar
       </button>
