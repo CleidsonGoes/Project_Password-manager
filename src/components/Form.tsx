@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 type FormProps = {
   exibitionElement: React.Dispatch<React.SetStateAction<boolean>>,
 };
@@ -5,6 +7,25 @@ type FormProps = {
 type ButtonCancel = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 
 function Form({ exibitionElement }:FormProps) {
+  const [name, setName] = useState('');
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [url, setUrl] = useState('');
+  // const regex = password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/);
+  const valido = 'valid-password-check';
+  const invalido = 'invalid-password-check';
+  const charMinEight = password.length >= 8;
+  const charMaxSixten = password.length <= 16;
+  const containLetterNumber = password.match(/^(?=.*[a-zA-Z])(?=.*\d).+$/);
+  const containCharSpecial = password.match(/[^\w\s]/g);
+
+  const validateBtnRegister = () => {
+    return name.length > 0 && login.length > 0 && charMinEight
+    && charMaxSixten && containLetterNumber && containCharSpecial;
+  };
+
+  const buttonDisable = validateBtnRegister();
+
   const handlerExibitionComponent = (event: ButtonCancel) => {
     event.preventDefault();
     exibitionElement(false);
@@ -12,28 +33,78 @@ function Form({ exibitionElement }:FormProps) {
 
   return (
     <form>
-      <label>
+      <label htmlFor="nameService">
         Nome do serviço
-        <input type="text" />
+        <input
+          required
+          id="nameService"
+          type="text"
+          value={ name }
+          onChange={ ({ target }) => setName(target.value) }
+        />
       </label>
-      <label>
+      <label htmlFor="Login">
         Login
-        <input type="text" />
+        <input
+          required
+          id="Login"
+          type="text"
+          value={ login }
+          onChange={ ({ target }) => setLogin(target.value) }
+        />
       </label>
-      <label>
+      <label htmlFor="password">
         Senha
-        <input type="password" />
+        <input
+          required
+          id="password"
+          type="password"
+          value={ password }
+          onChange={ ({ target }) => setPassword(target.value) }
+        />
       </label>
-      <label>
+      <label htmlFor="url">
         URL
-        <input type="text" />
+        <input
+          required
+          id="url"
+          type="text"
+          value={ url }
+          onChange={ ({ target }) => setUrl(target.value) }
+        />
       </label>
-      <button>
+      <button
+        disabled={ !buttonDisable }
+      >
         Cadastrar
       </button>
-      <button onClick={ handlerExibitionComponent }>
+      <button
+        onClick={ handlerExibitionComponent }
+      >
         Cancelar
       </button>
+      <div>
+        <p
+          className={ charMinEight ? valido : invalido }
+        >
+          Possuir 8 ou mais caracteres
+        </p>
+        <p
+          className={ charMaxSixten ? valido : invalido }
+        >
+          Possuir até 16 caracteres
+        </p>
+        <p
+          className={ containLetterNumber ? valido : invalido }
+        >
+          Possuir letras e números
+        </p>
+        <p
+          className={ containCharSpecial ? valido : invalido }
+        >
+          Possuir algum caractere especial
+        </p>
+      </div>
     </form>
   );
 }
