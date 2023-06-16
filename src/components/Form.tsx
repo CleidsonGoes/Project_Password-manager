@@ -13,14 +13,13 @@ type FormProps = {
   service: Service[]
 };
 
-type ButtonCancel = React.MouseEvent<HTMLButtonElement, MouseEvent>;
+type ButtonClick = React.MouseEvent<HTMLButtonElement, MouseEvent>;
 
 function Form({ exibitionElement, setService, service }:FormProps) {
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [url, setUrl] = useState('');
-  // const regex = password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/);
   const valido = 'valid-password-check';
   const invalido = 'invalid-password-check';
   const charMinEight = password.length >= 8;
@@ -35,12 +34,12 @@ function Form({ exibitionElement, setService, service }:FormProps) {
 
   const buttonDisable = validateBtnRegister();
 
-  const handlerExibitionComponent = (event: ButtonCancel) => {
+  const handlerExibitionComponent = (event: ButtonClick) => {
     event.preventDefault();
     exibitionElement(false);
   };
 
-  const handlerRegister = (event:ButtonCancel) => {
+  const handlerRegister = (event:ButtonClick) => {
     event.preventDefault();
     const objFields = {
       name,

@@ -17,6 +17,13 @@ function App() {
     setExibitionForm(true);
   };
 
+  const handlerRemoveRegister = (serv:Service) => {
+    console.log(serv);
+    const servicefiltered = service.filter((srvc) => srvc !== serv);
+    console.log(servicefiltered);
+    setService(servicefiltered);
+  };
+
   return (
     <>
       <div>
@@ -35,11 +42,21 @@ function App() {
         {
         service.length === 0
           ? <span>Nenhuma senha cadastrada</span>
-          : service.map((serv) => (
-            <article key={ serv.login }>
+          : service.map((serv, index) => (
+            <article key={ index }>
               <a href={ serv.url }>{serv.name}</a>
               <p>{serv.password}</p>
               <p>{serv.login}</p>
+              <label htmlFor="index">
+                <button
+                  type="button"
+                  id="{index}"
+                  data-testid="remove-btn"
+                  onClick={ () => handlerRemoveRegister(serv) }
+                >
+                  remover
+                </button>
+              </label>
             </article>
           ))
         }
