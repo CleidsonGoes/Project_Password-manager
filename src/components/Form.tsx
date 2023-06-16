@@ -49,6 +49,7 @@ function Form({ exibitionElement, setService, service }:FormProps) {
       url,
     };
     setService([...service, objFields]);
+    exibitionElement(false);
   };
 
   return (
