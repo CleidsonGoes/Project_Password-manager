@@ -20,6 +20,7 @@ function Form({ exibitionElement, setService, service }:FormProps) {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [url, setUrl] = useState('');
+  const [inputPassword, setInputPassword] = useState(true);
 
   const valido = 'valid-password-check';
   const invalido = 'invalid-password-check';
@@ -79,9 +80,18 @@ function Form({ exibitionElement, setService, service }:FormProps) {
         <input
           required
           id="password"
-          type="password"
+          type={ inputPassword ? 'password' : 'text' }
           value={ password }
           onChange={ ({ target }) => setPassword(target.value) }
+        />
+      </label>
+      <label htmlFor="keyword">
+        Mostrar Senha
+        <input
+          id="keyword"
+          type="checkbox"
+          data-testid="show-hide-form-password"
+          onChange={ () => setInputPassword(!inputPassword) }
         />
       </label>
       <label htmlFor="url">
