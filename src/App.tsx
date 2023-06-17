@@ -11,6 +11,8 @@ type Service = {
 
 function App() {
   const [exibitionForm, setExibitionForm] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const [service, setService] = useState<Service[]>([]);
 
   const handlerExibitionComponent = () => {
@@ -18,9 +20,7 @@ function App() {
   };
 
   const handlerRemoveRegister = (serv:Service) => {
-    console.log(serv);
     const servicefiltered = service.filter((srvc) => srvc !== serv);
-    console.log(servicefiltered);
     setService(servicefiltered);
   };
 
@@ -45,12 +45,12 @@ function App() {
           : service.map((serv, index) => (
             <article key={ index }>
               <a href={ serv.url }>{serv.name}</a>
-              <p>{serv.password}</p>
+              <p>{showPassword ? '******' : serv.password}</p>
               <p>{serv.login}</p>
-              <label htmlFor="index">
+              <label htmlFor={ `${index}` }>
                 <button
                   type="button"
-                  id="{index}"
+                  id={ `${index}` }
                   data-testid="remove-btn"
                   onClick={ () => handlerRemoveRegister(serv) }
                 >
@@ -61,6 +61,16 @@ function App() {
           ))
         }
       </section>
+      <label htmlFor="check">
+        Esconder senhas
+        <input
+          type="checkbox"
+          name="check"
+          id="check"
+          checked={ showPassword }
+          onChange={ () => setShowPassword(!showPassword) }
+        />
+      </label>
     </>
   );
 }

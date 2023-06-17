@@ -20,6 +20,7 @@ function Form({ exibitionElement, setService, service }:FormProps) {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [url, setUrl] = useState('');
+
   const valido = 'valid-password-check';
   const invalido = 'invalid-password-check';
   const charMinEight = password.length >= 8;
